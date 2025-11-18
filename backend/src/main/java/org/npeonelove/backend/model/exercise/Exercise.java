@@ -1,17 +1,15 @@
-package org.npeonelove.backend.model;
+package org.npeonelove.backend.model.exercise;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
+import org.npeonelove.backend.model.train.Train;
 
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.UUID;
 
 @Entity
-@Table(name = "trains")
+@Table(name = "exercises")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -19,22 +17,23 @@ import java.util.UUID;
 @EqualsAndHashCode
 @ToString
 @Builder
-public class Train {
+public class Exercise {
 
     @Id
-    @Column(name = "train_id")
-    private UUID train_id;
+    @Column(name = "exercise_id")
+    private UUID exerciseId;
 
     @Column(name = "title")
     private String title;
-
-    @Column(name = "description")
-    private String description;
 
     @Column(name = "text")
     private String text;
 
     @Column(name = "created_at")
     private LocalDateTime created_at;
+
+    @ManyToOne
+    @JoinColumn(name = "train_id")
+    private Train train;
 
 }
